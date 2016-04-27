@@ -3,4 +3,41 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
+    <servlet>
+        <servlet-name>LoginUserController</servlet-name>
+        <servlet-class>controller.LoginUserController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LoginUserController</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>RegisterUserController</servlet-name>
+        <servlet-class>controller.RegisterUserController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RegisterUserController</servlet-name>
+        <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>loginUserView</servlet-name>
+        <jsp-file>LoginUser.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>loginUserView</servlet-name>
+        <url-pattern>/loginUserView</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>registerUserView</servlet-name>
+        <jsp-file>RegisterUser.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>registerUserView</servlet-name>
+        <url-pattern>/registerUserView</url-pattern>
+    </servlet-mapping>
 </web-app>
