@@ -17,16 +17,16 @@ public class LoginUserController extends BaseServlet {
         User user = getUser();
 
         if (user != null) {
-            forward("/overview");
+            forward("/index.jsp");
         } else {
             String uname = request.getParameter("uname"), pw = request.getParameter("pw");
 
             if (uname != null && pw != null) {
-                user = UserDAO.getInstance().login(new User(uname, pw, "", -1));
+                user = UserDAO.getInstance().login(new User(uname, pw, "", -1L));
 
                 if (user != null) {
                     // login successful
-                    forward("/overview");
+                    forward("/index.jsp");
                 } else {
                     // wrong credentials
                     request.setAttribute("login_message", "Wrong login credentials.");

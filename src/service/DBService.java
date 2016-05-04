@@ -2,6 +2,7 @@ package service;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
+import javax.persistence.*;
 import javax.sql.DataSource;
 import java.sql.Connection;
 
@@ -10,7 +11,15 @@ import java.sql.Connection;
  */
 public class DBService {
     private static DBService instance;
-    private Connection connection;
+
+    @PersistenceContext
+    EntityManagerFactory emf;
+    EntityManager em;
+
+    private DBService() {
+        emf = Persistence.createEntityManagerFactory("testjpa");
+        em = emf.createEntityManager();
+    }
 
     public static DBService getInstance() {
         if (instance == null) {
@@ -19,18 +28,7 @@ public class DBService {
         return instance;
     }
 
-    public Connection getConnection() {
-        if (connection == null) {
-            try {
-                Context ctx = new InitialContext();
-                DataSource ds = (DataSource) ctx.lookup("jdbc/myDatasource");
-                connection = ds.getConnection();
-                connection.setAutoCommit(false);
-            } catch (Exception e) {
-                System.err.println("Could not establish database connection");
-                e.printStackTrace();
-            }
-        }
-        return connection;
+    public EntityManager getManager() {
+        return em;
     }
 }

@@ -1,6 +1,8 @@
 package domain;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
@@ -18,9 +20,10 @@ public class User {
     private String email;
 
     @Id
-    private long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    public User(String uname, String pw, String email, long id) {
+    public User(String uname, String pw, String email, Long id) {
         this.uname = uname;
         this.pw = getHash(pw);
         this.email = email;
@@ -30,11 +33,11 @@ public class User {
     public User() {
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
