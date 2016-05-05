@@ -3,10 +3,8 @@ package controller;
 import domain.User;
 import service.UserDAO;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 /**
  * Created by rfischer on 25.04.16.
@@ -23,7 +21,7 @@ public class LoginUserController extends BaseServlet {
 
             if (uname != null && pw != null) {
                 user = UserDAO.getInstance().login(new User(uname, pw, "", -1L));
-
+                request.getSession().setAttribute("user", user);
                 if (user != null) {
                     // login successful
                     forward("/index.jsp");

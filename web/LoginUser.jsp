@@ -13,7 +13,7 @@
     <title></title>
 </head>
 <body>
-<h1>Login form</h1>
+<h1>Login</h1>
 <form method="post" action="login">
     <div class="form-element">
         <label for="uname">Username</label>
@@ -23,8 +23,8 @@
         <label for="password">Password</label>
         <input type="password" name="pw" id="password">
     </div>
-    <c:if test="${requestScope.registration_msg != null}">
-        <b>${requestScope.registration_msg}</b>
+    <c:if test="${requestScope.login_message != null}">
+        <b>${requestScope.login_message}</b>
     </c:if>
 
     <div class="form-element">

@@ -2,21 +2,24 @@ package service;
 
 import domain.User;
 
+import javax.annotation.Resource;
+import javax.ejb.Stateless;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transaction;
+import javax.transaction.UserTransaction;
 import java.sql.Connection;
 
 /**
  * Created by rfischer on 25.04.16.
  */
+@Stateless
 public class UserDAO {
-    @PersistenceContext
+    @PersistenceContext(unitName = "testjpa")
     EntityManager em;
-
 
     public static UserDAO getInstance() {
         try {
@@ -27,7 +30,7 @@ public class UserDAO {
         }
     }
 
-    private UserDAO() {
+    public UserDAO() {
 
     }
 
@@ -37,10 +40,7 @@ public class UserDAO {
                 return null;
             }
 
-            //EntityTransaction t = DBService.getInstance().getManager().getTransaction();
-            //t.begin();
             em.persist(user);
-            //t.commit();
             em.flush();
 
             return user;
