@@ -12,7 +12,6 @@
     <head>
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/style.css" rel="stylesheet">
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Music Recommendation System</title>
     </head>
 
@@ -21,7 +20,8 @@
             <h1 class="page-header">Music Recommendation System</h1>
 
             <c:if test="${sessionScope.user != null}">
-                <h1>Hello ${$sessionScope.user.uname}</h1>
+                <h2>Hello ${sessionScope.user.getUname()}!</h2>
+                
                 <div class="btn-group" role="group">
                     <a role="button" class="btn btn-default" href="albumList">See the list of albums</a>
                     <a role="button" class="btn btn-default" href="addAlbum">Add an album</a>

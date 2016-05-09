@@ -9,6 +9,7 @@ import domain.Album;
 import java.util.EnumSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.ejb.Stateless;
 import javax.naming.InitialContext;
 import javax.naming.NameClassPair;
 import javax.naming.NamingEnumeration;
@@ -20,6 +21,7 @@ import javax.persistence.PersistenceContext;
  *
  * @author isma94
  */
+@Stateless
 public class AlbumDAO {
 
     @PersistenceContext(unitName = "testjpa")

@@ -10,6 +10,7 @@
 <html>
     <head>
         <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/style.css" rel="stylesheet">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Add a new album</title>
     </head>
