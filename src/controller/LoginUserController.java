@@ -1,7 +1,7 @@
 package controller;
 
 import domain.User;
-import service.UserDAO;
+import dao.UserDAO;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

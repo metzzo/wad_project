@@ -1,0 +1,9 @@
+######## TO DO ########
+
+* Change scriptlets for custom tags
+
+####### DATA SOURCE ########
+
+Connection pool: music-pool
+
+Data source: jdbc/musicDS

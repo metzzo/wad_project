@@ -12,9 +12,9 @@ import java.security.NoSuchAlgorithmException;
 /**
  * Created by rfischer on 25.04.16.
  */
-
 @Entity
 public class User {
+
     private String uname;
     private String pw;
     private String email;
@@ -41,6 +41,8 @@ public class User {
         this.id = id;
     }
 
+    /* ***************************** */
+    
     public String getUname() {
         return uname;
     }
@@ -70,18 +72,22 @@ public class User {
     }
 
     private static String getHash(String password) {
-        MessageDigest digest=null;
+        MessageDigest digest = null;
+        
         try {
             digest = MessageDigest.getInstance("SHA-1");
         } catch (NoSuchAlgorithmException ex) {
             ex.printStackTrace();
         }
+        
         digest.reset();
+        
         try {
             digest.update(password.getBytes("UTF-8"));
         } catch (UnsupportedEncodingException ex) {
             ex.printStackTrace();
         }
+        
         return new BigInteger(1, digest.digest()).toString(16);
     }
 }

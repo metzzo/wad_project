@@ -1,0 +1,11 @@
+<%-- Check if there was an error in the previous form --%>
+
+<c:set var="error" value=""/>
+
+<c:if test="${requestScope.formError != null}">
+    <c:set var="error" value="${requestScope.formError}"/>
+</c:if>
+
+<c:if test="${error ne ''}">
+    <div class="error">${error}</div>
+</c:if>
