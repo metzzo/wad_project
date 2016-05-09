@@ -6,7 +6,7 @@
 package controller;
 
 import dao.AlbumDAO;
-import dao.AlbumDAOImpl;
+import dao.AlbumDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class AddAlbumController extends HttpServlet {
     
-    AlbumDAO albumDAO = AlbumDAOImpl.getInstance();
+    AlbumDAO albumDAO = AlbumDAO.getInstance();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
