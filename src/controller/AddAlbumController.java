@@ -6,6 +6,8 @@
 package controller;
 
 import dao.AlbumDAO;
+import domain.Album;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,7 +15,6 @@ import java.nio.file.Files;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
@@ -54,8 +55,7 @@ public class AddAlbumController extends BaseServlet {
             
             request.setAttribute("formError", error);
 
-            rd = request.getRequestDispatcher("addAlbumView");
-            rd.forward(request, response);
+            forward("addAlbumView");
         } else {
             // Get the information of the uploaded image file
             Part coverImg = request.getPart("cover");
@@ -63,7 +63,7 @@ public class AddAlbumController extends BaseServlet {
             InputStream coverImgContent = coverImg.getInputStream();
 
             // Define the path to the final storage location
-            File imageFolder = new File(getServletContext().getInitParameter("upload-location") + "/img");
+            File imageFolder = new File(getServletContext().getRealPath("/album_img"));
 
             // When an image with the same name already exists, modify the name to not override it
             File coverFile = new File(imageFolder, coverImgName);
@@ -82,52 +82,11 @@ public class AddAlbumController extends BaseServlet {
             // Save the image file in the server's disk file system
             Files.copy(coverImgContent, coverFile.toPath());
             
-            albumDAO.createAlbum(title, author, year, coverFile.getName(), genre, label);
+            albumDAO.persist(new Album(title, author, year, coverFile.getName(), genre, label));
 
             this.getServletContext().setAttribute("ALBUMS", albumDAO.getAllAlbums());
-            
-            rd = request.getRequestDispatcher("index.jsp");
-            rd.forward(request, response);
+
+            forward("index.jsp");
         }
     }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }

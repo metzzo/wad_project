@@ -78,7 +78,9 @@ public abstract class BaseServlet extends javax.servlet.http.HttpServlet {
     public void forward(String url) {
         try {
             request.getRequestDispatcher(url).forward(request, response);
-        } catch (ServletException | IOException e) {
+        } catch (ServletException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }

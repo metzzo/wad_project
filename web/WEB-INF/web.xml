@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
-    <context-param>
-        <description>Location to store uploaded files</description>
-        <param-name>upload-location</param-name>
-        <param-value>C:/Users/isma9/Dropbox/Universidad/4/WAD/wad_project/web</param-value>
-    </context-param>
     <listener>
         <description>ServletContextListener</description>
         <listener-class>listener.ContextListener</listener-class>
@@ -41,6 +36,22 @@
         <servlet-name>registerController</servlet-name>
         <url-pattern>/registerController</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>makeReviewController</servlet-name>
+        <servlet-class>controller.MakeReviewController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>makeReviewController</servlet-name>
+        <url-pattern>/makeReviewController</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>seeReviewController</servlet-name>
+        <servlet-class>controller.SeeReviewController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>seeReviewController</servlet-name>
+        <url-pattern>/seeReviewController</url-pattern>
+    </servlet-mapping>
     <!-- ************************************************* -->
     <servlet>
         <servlet-name>loginView</servlet-name>
@@ -73,5 +84,21 @@
     <servlet-mapping>
         <servlet-name>albumListView</servlet-name>
         <url-pattern>/albumListView</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>makeReviewView</servlet-name>
+        <jsp-file>makeReview.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>makeReviewView</servlet-name>
+        <url-pattern>/makeReviewView</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>seeReviewView</servlet-name>
+        <jsp-file>seeReview.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>seeReviewView</servlet-name>
+        <url-pattern>/seeReviewView</url-pattern>
     </servlet-mapping>
 </web-app>

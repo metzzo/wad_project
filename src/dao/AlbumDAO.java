@@ -32,17 +32,16 @@ public class AlbumDAO {
         }
     }
     
-    public Album createAlbum(String title, String author, int year, String cover, String genre, String label) {
-        Album newAlbum = null;
+    public Album persist(Album newAlbum) {
         
-        if (!this.albumExists(title, author, year)) {
-            newAlbum = new Album(title, author, year, cover, genre, label);
-            
+        if (!this.albumExists(newAlbum.getTitle(), newAlbum.getAuthor(), newAlbum.getYear())) {
             em.persist(newAlbum);
             em.flush();
+
+            return newAlbum;
+        } else {
+            return null;
         }
-        
-        return newAlbum;
     }
 
     public boolean albumExists(String title, String author, int year) {
@@ -56,4 +55,7 @@ public class AlbumDAO {
         return em.createQuery("SELECT a FROM Album a").getResultList();
     }
 
+    public Album getAlbumById(Long id) {
+        return em.find(Album.class, id);
+    }
 }

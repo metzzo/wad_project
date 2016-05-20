@@ -6,10 +6,9 @@
 package domain;
 
 import java.io.Serializable;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.*;
 
 /**
  *
@@ -23,11 +22,17 @@ public class Review implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
-    private Long albumId;
-    private Long userId;
+
+    @ManyToOne
+    private Album album;
+
+    @ManyToOne
+    private MyUser user;
     private String review;
     private int score;
+
+    @OneToMany(cascade = CascadeType.PERSIST)
+    private List<Comment> comments;
 
     public Long getId() {
         return id;
@@ -35,6 +40,17 @@ public class Review implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Review(Album album, MyUser user, String review, int score) {
+        this.album = album;
+        this.user = user;
+        this.review = review;
+        this.score = score;
+        this.comments = new ArrayList<Comment>();
+    }
+
+    public Review() {
     }
 
     @Override
@@ -63,21 +79,21 @@ public class Review implements Serializable {
     }
 
     /* ***************************** */
-    
-    public Long getAlbumId() {
-        return albumId;
+
+    public Album getAlbum() {
+        return album;
     }
 
-    public void setAlbumId(Long albumId) {
-        this.albumId = albumId;
+    public void setAlbum(Album album) {
+        this.album = album;
     }
 
-    public Long getUserId() {
-        return userId;
+    public MyUser getUser() {
+        return user;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setUser(MyUser user) {
+        this.user = user;
     }
 
     public String getReview() {
@@ -96,4 +112,11 @@ public class Review implements Serializable {
         this.score = score;
     }
 
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
 }
