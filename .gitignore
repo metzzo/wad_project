@@ -19,3 +19,5 @@ build.xml
 /build/
 /dist/
 /conf/persistence.xml
+
+out/
