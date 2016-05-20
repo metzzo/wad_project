@@ -26,15 +26,18 @@ public class Album implements Serializable {
     
     private String title;
     private String author;
-    private int year;
+    private int launchYear;
     
+    private String cover;
     private String genre;
     private String label;
 
-    public Album(String title, String author, int year, String genre, String label) {
+    public Album(String title, String author, int year, String cover, String genre, String label) {
         this.title = title;
         this.author = author;
-        this.year = year;
+        this.launchYear = year;
+        
+        this.cover = cover;
         this.genre = genre;
         this.label = label;
     }
@@ -94,14 +97,22 @@ public class Album implements Serializable {
         this.author = author;
     }
 
-    public int getYear() {
-        return year;
+    public int getLaunchYear() {
+        return launchYear;
     }
 
-    public void setYear(int year) {
-        this.year = year;
+    public void setLaunchYear(int launchYear) {
+        this.launchYear = launchYear;
     }
 
+    public String getCover() {
+        return cover;
+    }
+
+    public void setCover(String cover) {
+        this.cover = cover;
+    }
+    
     public String getGenre() {
         return genre;
     }

@@ -1,17 +1,12 @@
 package dao;
 
-import domain.User;
+import domain.MyUser;
 
-import javax.annotation.Resource;
 import javax.ejb.Stateless;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
-import javax.transaction.Transaction;
-import javax.transaction.UserTransaction;
-import java.sql.Connection;
 
 /**
  * Created by rfischer on 25.04.16.
@@ -34,7 +29,7 @@ public class UserDAO {
 
     }
 
-    public User register(User user) {
+    public MyUser register(MyUser user) {
         try {
             if (doesUsernameExist(user.getUname())) {
                 return null;
@@ -50,10 +45,10 @@ public class UserDAO {
         }
     }
 
-    public User login(User temporaryUser) {
+    public MyUser login(MyUser temporaryUser) {
         try {
-            User u = (User)em
-                    .createQuery("select u from User u where u.uname = :uname and u.pw = :pw")
+            MyUser u = (MyUser)em
+                    .createQuery("select u from MyUser u where u.uname = :uname and u.pw = :pw")
                     .setParameter("uname", temporaryUser.getUname())
                     .setParameter("pw", temporaryUser.getPw())
                     .getSingleResult();
@@ -67,7 +62,7 @@ public class UserDAO {
         try {
             int count =
                     ((Number)em
-                            .createQuery("select count(u) from User u where u.uname = :uname")
+                            .createQuery("select count(u) from MyUser u where u.uname = :uname")
                             .setParameter("uname", uname)
                             .getSingleResult()).intValue();
 

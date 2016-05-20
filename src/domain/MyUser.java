@@ -1,5 +1,6 @@
 package domain;
 
+import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,7 +14,7 @@ import java.security.NoSuchAlgorithmException;
  * Created by rfischer on 25.04.16.
  */
 @Entity
-public class User {
+public class MyUser implements Serializable {
 
     private String uname;
     private String pw;
@@ -23,14 +24,14 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    public User(String uname, String pw, String email, Long id) {
+    public MyUser(String uname, String pw, String email, Long id) {
         this.uname = uname;
         this.pw = getHash(pw);
         this.email = email;
         this.id = id;
     }
 
-    public User() {
+    public MyUser() {
     }
 
     public Long getId() {

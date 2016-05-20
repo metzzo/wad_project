@@ -1,8 +1,9 @@
 ######## TO DO ########
 
+* Add option to upload the cover of the album (create a new field 'cover' in Album)
+
 * Change scriptlet in addAlbum for custom tags
 
-* Add option to upload the cover of the album (create a new field 'cover' in Album)
 
 ####### DATA SOURCE ########
 

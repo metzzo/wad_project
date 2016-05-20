@@ -6,13 +6,8 @@
 package dao;
 
 import domain.Album;
-import java.util.EnumSet;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.naming.InitialContext;
-import javax.naming.NameClassPair;
-import javax.naming.NamingEnumeration;
 import javax.naming.NamingException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -36,11 +31,11 @@ public class AlbumDAO {
         }
     }
     
-    public Album createAlbum(String title, String author, int year, String genre, String label) {
+    public Album createAlbum(String title, String author, int year, String cover, String genre, String label) {
         Album newAlbum = null;
         
         if (!this.albumExists(title, author, year)) {
-            newAlbum = new Album(title, author, year, genre, label);
+            newAlbum = new Album(title, author, year, cover, genre, label);
             
             em.persist(newAlbum);
             em.flush();
@@ -51,8 +46,8 @@ public class AlbumDAO {
 
     public boolean albumExists(String title, String author, int year) {
         return !em.createQuery(
-            "SELECT a FROM Album a WHERE a.title = :title and a.author = :author and a.year = :year")
-            .setParameter("title", title).setParameter("author", author).setParameter("year", year)
+            "SELECT a FROM Album a WHERE a.title = :title AND a.author = :author AND a.launchYear = :launchYear")
+            .setParameter("title", title).setParameter("author", author).setParameter("launchYear", year)
             .getResultList().isEmpty();
     }
 

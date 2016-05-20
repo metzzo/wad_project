@@ -6,19 +6,23 @@
 package controller;
 
 import dao.AlbumDAO;
-import dao.AlbumDAO;
+import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.InputStream;
+import java.nio.file.Files;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 /**
  *
  * @author isma94
  */
+@MultipartConfig
 public class AddAlbumController extends HttpServlet {
     
     AlbumDAO albumDAO = AlbumDAO.getInstance();
@@ -39,25 +43,51 @@ public class AddAlbumController extends HttpServlet {
         
         boolean hasErrors = false;
         String error = "";
-
+        
+        // Get introduced values in the form (except the cover image, that requires special treatment)
         String title = request.getParameter("title");
         String author = request.getParameter("author");
         int year = Integer.parseInt(request.getParameter("year"));
         String genre = request.getParameter("genre");
         String label = request.getParameter("label");
         
+        // Get the information of the uploaded image file
+        Part coverImg = request.getPart("cover");
+        String coverImgName = coverImg.getSubmittedFileName();
+        InputStream coverImgContent = coverImg.getInputStream();
+        
+        // Define the path to the final storage location
+        File imageFolder = new File(getServletContext().getInitParameter("upload-location") + "/img");
+        
+        // When an image with the same name already exists, modify the name to not override it
+        File coverFile = new File(imageFolder, coverImgName);
+        int i = 0;
+        
+        while (Files.exists(coverFile.toPath())) {
+            // Separate the name and the extension of the image
+            String[] imgNameParts = coverImgName.split("\\.(?=[^\\.]+$)");
+            
+            // Create the new name and join it with the extension
+            coverFile = new File(imageFolder, imgNameParts[0] + i + '.' + imgNameParts[1]);
+            
+            i++;
+        }
+        
+        // Save the image file in the server's disk file system
+        Files.copy(coverImgContent, coverFile.toPath());
+        
         if (albumDAO.albumExists(title, author, year)) {
             hasErrors = true;
-            error = "Album already exists";
+            error = "This album already exists";
         }
         
         if (hasErrors) {
             request.setAttribute("formError", error);
 
-            rd = request.getRequestDispatcher("addAlbum");
+            rd = request.getRequestDispatcher("addAlbumView");
             rd.forward(request, response);
         } else {
-            albumDAO.createAlbum(title, author, year, genre, label);
+            albumDAO.createAlbum(title, author, year, coverFile.getPath(), genre, label);
 
             rd = request.getRequestDispatcher("index.jsp");
             rd.forward(request, response);

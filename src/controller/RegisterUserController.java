@@ -1,6 +1,6 @@
 package controller;
 
-import domain.User;
+import domain.MyUser;
 import dao.UserDAO;
 
 import javax.servlet.ServletException;
@@ -16,7 +16,7 @@ import java.util.List;
 public class RegisterUserController extends BaseServlet {
     @Override
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) {
-        User user = getUser();
+        MyUser user = getUser();
 
         if (user != null) {
             // already logged in
@@ -25,7 +25,7 @@ public class RegisterUserController extends BaseServlet {
             String uname = request.getParameter("uname"), pw = request.getParameter("pw"), pw2 = request.getParameter("pw2"), mail = request.getParameter("email");
 
             if (uname == null || pw == null || pw2 == null || mail == null) {
-                forward("/registerUserView");
+                forward("/registerView");
             } else {
                 boolean equalPw = pw.equals(pw2);
                 boolean alreadyExists = UserDAO.getInstance().doesUsernameExist(uname);
@@ -50,19 +50,20 @@ public class RegisterUserController extends BaseServlet {
 
                 request.setAttribute("errors", errors);
 
-                if (errors.size() == 0) {
+                if (errors.isEmpty()) {
                     System.out.println("Register user");
-                    User u = UserDAO.getInstance().register(new User(uname, pw, mail, null));
+                    MyUser u = UserDAO.getInstance().register(new MyUser(uname, pw, mail, null));
+                    
                     if (u != null) {
                         // success
                         forward("/index.jsp");
                     } else {
                         // not sucess
-                        forward("/registerUserView");
+                        forward("/registerView");
                     }
                 } else {
                     System.out.println("Not possible");
-                    forward("/registerUserView");
+                    forward("/registerView");
                 }
             }
         }

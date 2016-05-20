@@ -1,6 +1,6 @@
 package controller;
 
-import domain.User;
+import domain.MyUser;
 import dao.UserDAO;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 public class LoginUserController extends BaseServlet {
     @Override
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) {
-        User user = getUser();
+        MyUser user = getUser();
 
         if (user != null) {
             forward("/index.jsp");
@@ -20,7 +20,7 @@ public class LoginUserController extends BaseServlet {
             String uname = request.getParameter("uname"), pw = request.getParameter("pw");
 
             if (uname != null && pw != null) {
-                user = UserDAO.getInstance().login(new User(uname, pw, "", -1L));
+                user = UserDAO.getInstance().login(new MyUser(uname, pw, "", -1L));
                 request.getSession().setAttribute("user", user);
                 if (user != null) {
                     // login successful
@@ -28,11 +28,11 @@ public class LoginUserController extends BaseServlet {
                 } else {
                     // wrong credentials
                     request.setAttribute("login_message", "Wrong login credentials.");
-                    forward("/loginUserView");
+                    forward("/loginView");
                 }
             } else {
                 // not yet pressed login button
-                forward("/loginUserView");
+                forward("/loginView");
             }
         }
     }

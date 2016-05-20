@@ -1,6 +1,6 @@
 package controller;
 
-import domain.User;
+import domain.MyUser;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -39,9 +39,9 @@ public abstract class BaseServlet extends javax.servlet.http.HttpServlet {
      * Returns User object from Session object
      * @return
      */
-    public User getUser() {
+    public MyUser getUser() {
         Object obj = request.getSession().getAttribute("user");
-        return obj == null || !(obj instanceof User) ? null : (User)obj;
+        return obj == null || !(obj instanceof MyUser) ? null : (MyUser)obj;
     }
 
     /**

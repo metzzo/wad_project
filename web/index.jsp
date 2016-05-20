@@ -23,16 +23,16 @@
                 <h2>Hello ${sessionScope.user.getUname()}!</h2>
                 
                 <div class="btn-group" role="group">
-                    <a role="button" class="btn btn-default" href="albumList">See the list of albums</a>
-                    <a role="button" class="btn btn-default" href="addAlbum">Add an album</a>
-                    <a role="button" class="btn btn-default" href="addReview">Add a review</a>
+                    <a role="button" class="btn btn-default" href="albumListView">See the list of albums</a>
+                    <a role="button" class="btn btn-default" href="addAlbumView">Add an album</a>
+                    <a role="button" class="btn btn-default" href="addReviewView">Add a review</a>
                 </div>
             </c:if>
 
             <c:if test="${sessionScope.user == null}">
                 <div class="btn-group" role="group">
-                    <a role="button" class="btn btn-default" href="register">Register</a>
-                    <a role="button" class="btn btn-default" href="login">Login</a>
+                    <a role="button" class="btn btn-default" href="registerView">Register</a>
+                    <a role="button" class="btn btn-default" href="loginView">Login</a>
                 </div>
             </c:if>
         </div>

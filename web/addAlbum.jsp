@@ -19,7 +19,7 @@
         <div class="container">
             <h1 class="page-header">Add a new album</h1>
 
-            <form role="form" method="post" action="AddAlbumController">
+            <form role="form" method="post" action="addAlbumController" enctype="multipart/form-data">
                 <div class="form-group">
                     <div class="input-group">
                         <label for="title">Title:</label>
@@ -34,17 +34,26 @@
                     <div class="input-group">
                         <label for="year">Year:</label>
 
-                        <select class="form-control" id="year" name="year" required>
-                            <% for (int i = Calendar.getInstance().get(Calendar.YEAR); i >= 1900; i--) {
+                        <select class="form-control" name="year" required>
+                            <%  int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+                                
+                                out.println("<option selected>" + currentYear + "</option>");
+                                
+                                for (int i = (currentYear - 1); i >= 1900; i--) {
                                     out.println("<option>" + i + "</option>");
                                 }
                             %>
                         </select>
                     </div>
+                        
+                    <div class="input-group">
+                        <label for="cover">Cover:</label>
+                        <input type="file" name="cover" id="cover" accept="image/*" required>
+                    </div>
 
                     <div class="input-group">
                         <label for="genre">Genre:</label>
-                        <select class="form-control" name="genre" id="genre" required>
+                        <select class="form-control" name="genre" required>
                             <option>Blues</option>
                             <option>Country</option>
                             <option>Electronic</option>
