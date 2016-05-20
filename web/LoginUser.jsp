@@ -16,7 +16,7 @@
     </head>
     <body>
         <h1>Login</h1>
-        <form method="post" action="login">
+        <form method="post" action="loginController">
             <div class="form-element">
                 <label for="uname">Username</label>
                 <input type="text" name="uname" id="uname">

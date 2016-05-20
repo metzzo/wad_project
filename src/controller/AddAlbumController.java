@@ -57,7 +57,7 @@ public class AddAlbumController extends HttpServlet {
         InputStream coverImgContent = coverImg.getInputStream();
         
         // Define the path to the final storage location
-        File imageFolder = new File(getServletContext().getInitParameter("upload-location") + "/img");
+        File imageFolder = new File(getServletContext().getRealPath("/album_img"));
         
         // When an image with the same name already exists, modify the name to not override it
         File coverFile = new File(imageFolder, coverImgName);

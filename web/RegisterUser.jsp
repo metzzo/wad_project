@@ -15,7 +15,7 @@
     </head>
     <body>
         <h1>Registration</h1>
-        <form method="post" action="register">
+        <form method="post" action="registerController">
             <div class="form-element">
                 <label for="uname">Username</label>
                 <input type="text" name="uname" id="uname">
