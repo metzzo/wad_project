@@ -31,6 +31,9 @@ public class Album implements Serializable {
     private String cover;
     private String genre;
     private String label;
+    
+    // Average score from the user reviews (between 0 and 5)
+    private int avgScore;
 
     public Album(String title, String author, int year, String cover, String genre, String label) {
         this.title = title;
@@ -40,6 +43,8 @@ public class Album implements Serializable {
         this.cover = cover;
         this.genre = genre;
         this.label = label;
+        
+        this.avgScore = -1; // To indicate that this album doesn't have any review yet
     }
     
     public Album() {
@@ -97,11 +102,11 @@ public class Album implements Serializable {
         this.author = author;
     }
 
-    public int getLaunchYear() {
+    public int getYear() {
         return launchYear;
     }
 
-    public void setLaunchYear(int launchYear) {
+    public void setYear(int launchYear) {
         this.launchYear = launchYear;
     }
 
@@ -128,6 +133,12 @@ public class Album implements Serializable {
     public void setLabel(String label) {
         this.label = label;
     }
-    
-    
+
+    public int getAvgScore() {
+        return avgScore;
+    }
+
+    public void setAvgScore(int avgScore) {
+        this.avgScore = avgScore;
+    }
 }

@@ -17,11 +17,13 @@ public class LoginUserController extends BaseServlet {
         if (user != null) {
             forward("/index.jsp");
         } else {
-            String uname = request.getParameter("uname"), pw = request.getParameter("pw");
+            String uname = request.getParameter("uname");
+            String pw = request.getParameter("pw");
 
             if (uname != null && pw != null) {
                 user = UserDAO.getInstance().login(new MyUser(uname, pw, "", -1L));
                 request.getSession().setAttribute("user", user);
+                
                 if (user != null) {
                     // login successful
                     forward("/index.jsp");

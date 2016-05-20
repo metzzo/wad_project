@@ -9,6 +9,19 @@ and open the template in the editor.
 */
 
 body {
-    background-image: url('img/background.jpg');
-    background-color: silver;
+    min-height: 1000px;
+    background: linear-gradient(to bottom, #eeeeee 0%, #cccccc 30%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+}
+
+.btn-group {
+    padding-bottom: 20px;
+}
+
+.score {
+    font-size: large;
+    color: gold;
+}
+
+.review-button-group .btn {
+    width: 120px;
 }

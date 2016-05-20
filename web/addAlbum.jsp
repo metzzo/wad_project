@@ -5,20 +5,20 @@
 --%>
 
 <%@page import="java.util.Calendar"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <head>
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/style.css" rel="stylesheet">
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <%@include file="/WEB-INF/jspf/includes.jspf" %>
         <title>Add a new album</title>
     </head>
 
     <body>
+        <%@include file="/WEB-INF/jspf/header.jspf" %>
+        
+        <h2 class="page-header">Add a new album</h2>
+        
         <div class="container">
-            <h1 class="page-header">Add a new album</h1>
-
             <form role="form" method="post" action="addAlbumController" enctype="multipart/form-data">
                 <div class="form-group">
                     <div class="input-group">

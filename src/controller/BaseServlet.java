@@ -11,18 +11,43 @@ import java.io.IOException;
  * Created by rfischer on 25.04.16.
  */
 public abstract class BaseServlet extends javax.servlet.http.HttpServlet {
+    
     private HttpServletRequest request;
     private HttpServletResponse response;
-
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    
+    /****************************
+     ***** ABSTRACT METHODS *****
+     ****************************/
+    
+    /**
+     * Called when servlet is opened
+     * @param request
+     * @param response
+     * @throws javax.servlet.ServletException
+     * @throws java.io.IOException
+     */
+    protected abstract void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException;
+    
+    
+    /*******************************
+     ***** IMPLEMENTED METHODS *****
+     *******************************/
+    
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException {
         myProcessRequest(request, response);
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException {
         myProcessRequest(request, response);
     }
 
-    private void myProcessRequest(HttpServletRequest request, HttpServletResponse response) {
+    private void myProcessRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         HttpServletResponse tmpResponse = this.response;
         HttpServletRequest tmpRequest = this.request;
 
@@ -47,21 +72,14 @@ public abstract class BaseServlet extends javax.servlet.http.HttpServlet {
     /**
      * Forwards current request to given URL
      * @param url
-     * @throws ServletException
-     * @throws IOException
+     * @throws javax.servlet.ServletException
+     * @throws java.io.IOException
      */
     public void forward(String url) {
         try {
             request.getRequestDispatcher(url).forward(request, response);
-        } catch (Exception e) {
+        } catch (ServletException | IOException e) {
             throw new RuntimeException(e);
         }
     }
-
-    /**
-     * Called when servlet is opened
-     * @param request
-     * @param response
-     */
-    protected abstract void processRequest(HttpServletRequest request, HttpServletResponse response);
 }

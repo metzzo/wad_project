@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <context-param>
-        <description>Location to store uploaded files</description> 
+        <description>Location to store uploaded files</description>
         <param-name>upload-location</param-name>
         <param-value>C:/Users/isma9/Dropbox/Universidad/4/WAD/wad_project/web</param-value>
     </context-param>
-    
+    <listener>
+        <description>ServletContextListener</description>
+        <listener-class>listener.ContextListener</listener-class>
+    </listener>
     <servlet>
         <servlet-name>loginController</servlet-name>
         <servlet-class>controller.LoginUserController</servlet-class>
@@ -14,7 +17,14 @@
         <servlet-name>loginController</servlet-name>
         <url-pattern>/loginController</url-pattern>
     </servlet-mapping>
-    
+    <servlet>
+        <servlet-name>logoutController</servlet-name>
+        <servlet-class>controller.LogoutUserController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>logoutController</servlet-name>
+        <url-pattern>/logoutController</url-pattern>
+    </servlet-mapping>
     <servlet>
         <servlet-name>addAlbumController</servlet-name>
         <servlet-class>controller.AddAlbumController</servlet-class>
@@ -23,18 +33,15 @@
         <servlet-name>addAlbumController</servlet-name>
         <url-pattern>/addAlbumController</url-pattern>
     </servlet-mapping>
-    
     <servlet>
         <servlet-name>registerController</servlet-name>
         <servlet-class>controller.RegisterUserController</servlet-class>
     </servlet>
-     <servlet-mapping>
+    <servlet-mapping>
         <servlet-name>registerController</servlet-name>
         <url-pattern>/registerController</url-pattern>
     </servlet-mapping>
-    
     <!-- ************************************************* -->
-    
     <servlet>
         <servlet-name>loginView</servlet-name>
         <jsp-file>loginUser.jsp</jsp-file>
@@ -43,7 +50,6 @@
         <servlet-name>loginView</servlet-name>
         <url-pattern>/loginView</url-pattern>
     </servlet-mapping>
-    
     <servlet>
         <servlet-name>registerView</servlet-name>
         <jsp-file>registerUser.jsp</jsp-file>
@@ -52,7 +58,6 @@
         <servlet-name>registerView</servlet-name>
         <url-pattern>/registerView</url-pattern>
     </servlet-mapping>
-    
     <servlet>
         <servlet-name>addAlbumView</servlet-name>
         <jsp-file>addAlbum.jsp</jsp-file>
@@ -61,5 +66,12 @@
         <servlet-name>addAlbumView</servlet-name>
         <url-pattern>/addAlbumView</url-pattern>
     </servlet-mapping>
-
+    <servlet>
+        <servlet-name>albumListView</servlet-name>
+        <jsp-file>albumList.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>albumListView</servlet-name>
+        <url-pattern>/albumListView</url-pattern>
+    </servlet-mapping>
 </web-app>

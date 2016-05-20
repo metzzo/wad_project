@@ -23,7 +23,7 @@ import javax.servlet.http.Part;
  * @author isma94
  */
 @MultipartConfig
-public class AddAlbumController extends HttpServlet {
+public class AddAlbumController extends BaseServlet {
     
     AlbumDAO albumDAO = AlbumDAO.getInstance();
 
@@ -36,13 +36,11 @@ public class AddAlbumController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    @Override
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
         RequestDispatcher rd;
-        
-        boolean hasErrors = false;
-        String error = "";
         
         // Get introduced values in the form (except the cover image, that requires special treatment)
         String title = request.getParameter("title");
@@ -51,44 +49,43 @@ public class AddAlbumController extends HttpServlet {
         String genre = request.getParameter("genre");
         String label = request.getParameter("label");
         
-        // Get the information of the uploaded image file
-        Part coverImg = request.getPart("cover");
-        String coverImgName = coverImg.getSubmittedFileName();
-        InputStream coverImgContent = coverImg.getInputStream();
-        
-        // Define the path to the final storage location
-        File imageFolder = new File(getServletContext().getInitParameter("upload-location") + "/img");
-        
-        // When an image with the same name already exists, modify the name to not override it
-        File coverFile = new File(imageFolder, coverImgName);
-        int i = 0;
-        
-        while (Files.exists(coverFile.toPath())) {
-            // Separate the name and the extension of the image
-            String[] imgNameParts = coverImgName.split("\\.(?=[^\\.]+$)");
-            
-            // Create the new name and join it with the extension
-            coverFile = new File(imageFolder, imgNameParts[0] + i + '.' + imgNameParts[1]);
-            
-            i++;
-        }
-        
-        // Save the image file in the server's disk file system
-        Files.copy(coverImgContent, coverFile.toPath());
-        
         if (albumDAO.albumExists(title, author, year)) {
-            hasErrors = true;
-            error = "This album already exists";
-        }
-        
-        if (hasErrors) {
+            String error = "This album already exists";
+            
             request.setAttribute("formError", error);
 
             rd = request.getRequestDispatcher("addAlbumView");
             rd.forward(request, response);
         } else {
-            albumDAO.createAlbum(title, author, year, coverFile.getPath(), genre, label);
+            // Get the information of the uploaded image file
+            Part coverImg = request.getPart("cover");
+            String coverImgName = coverImg.getSubmittedFileName();
+            InputStream coverImgContent = coverImg.getInputStream();
 
+            // Define the path to the final storage location
+            File imageFolder = new File(getServletContext().getInitParameter("upload-location") + "/img");
+
+            // When an image with the same name already exists, modify the name to not override it
+            File coverFile = new File(imageFolder, coverImgName);
+            int i = 0;
+
+            while (Files.exists(coverFile.toPath())) {
+                // Separate the name and the extension of the image
+                String[] imgNameParts = coverImgName.split("\\.(?=[^\\.]+$)");
+
+                // Create the new name and join it with the extension
+                coverFile = new File(imageFolder, imgNameParts[0] + i + '.' + imgNameParts[1]);
+
+                i++;
+            }
+            
+            // Save the image file in the server's disk file system
+            Files.copy(coverImgContent, coverFile.toPath());
+            
+            albumDAO.createAlbum(title, author, year, coverFile.getName(), genre, label);
+
+            this.getServletContext().setAttribute("ALBUMS", albumDAO.getAllAlbums());
+            
             rd = request.getRequestDispatcher("index.jsp");
             rd.forward(request, response);
         }

@@ -6,6 +6,7 @@
 package dao;
 
 import domain.Album;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -49,6 +50,10 @@ public class AlbumDAO {
             "SELECT a FROM Album a WHERE a.title = :title AND a.author = :author AND a.launchYear = :launchYear")
             .setParameter("title", title).setParameter("author", author).setParameter("launchYear", year)
             .getResultList().isEmpty();
+    }
+    
+    public List<Album> getAllAlbums() {
+        return em.createQuery("SELECT a FROM Album a").getResultList();
     }
 
 }
