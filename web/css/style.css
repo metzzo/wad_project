@@ -13,15 +13,51 @@ body {
     background: linear-gradient(to bottom, #eeeeee 0%, #cccccc 30%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 }
 
-.btn-group {
-    padding-bottom: 20px;
-}
-
 .score {
     font-size: large;
-    color: gold;
+    color: goldenrod;
+    margin-bottom: 5px;
 }
 
-.review-button-group .btn {
-    width: 120px;
+.review-btn-group .btn {
+    width: 140px;
+}
+
+.album-list {
+    margin-top: 20px;
+}
+
+.album-card {
+    height: 140px;
+    background-color: khaki;
+    margin-bottom: 10px;
+}
+
+.review-card {
+    background-color: yellowgreen;
+    margin-bottom: 10px;
+}
+
+.album-card img {
+    border-width: medium;
+    border-style: groove;
+    border-color: darkblue;
+}
+
+.comment-header {
+    color: darkred;
+}
+
+.review-text {
+    font-family: "Times New Roman", Times, serif;
+    font-size: large;
+}
+
+.comment-list {
+    margin-bottom: 10px;
+}
+
+.review-card hr {
+    margin-top: 10px;
+    margin-bottom: 10px;
 }

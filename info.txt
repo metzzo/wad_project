@@ -1,7 +1,5 @@
 ######## TO DO ########
 
-* Add option to upload the cover of the album (create a new field 'cover' in Album)
-
 * Change scriptlet in addAlbum for custom tags
 
 
@@ -10,3 +8,10 @@
 Connection pool: music-pool
 
 Data source: jdbc/musicDS
+
+
+####### IMG UPLOAD ########
+
+The only valid method is getRealPath, but it returns the path of the deployment folder ("build"), so if we clean the project they will be gone
+
+To make them permanent, we must store them in the web folder of the web project => SOLUTION: Deleting "/build" from the path

@@ -6,6 +6,7 @@
 package dao;
 
 import domain.Album;
+import domain.Review;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.naming.InitialContext;
@@ -33,7 +34,6 @@ public class AlbumDAO {
     }
     
     public Album persist(Album newAlbum) {
-        
         if (!this.albumExists(newAlbum.getTitle(), newAlbum.getAuthor(), newAlbum.getYear())) {
             em.persist(newAlbum);
             em.flush();
@@ -57,5 +57,25 @@ public class AlbumDAO {
 
     public Album getAlbumById(Long id) {
         return em.find(Album.class, id);
+    }
+    
+    public double updateAvgScore(Album album) {
+        List<Review> reviews = em.createQuery("SELECT r FROM Review r WHERE r.album.id = :albumID")
+                                 .setParameter("albumID", album.getId()).getResultList();
+        
+        double avgScore = 0;
+        
+        for (Review r: reviews) {
+            avgScore += r.getScore();
+        }
+        
+        avgScore = avgScore / (double) reviews.size();
+        
+        album.setAvgScore(avgScore);
+        
+        em.merge(album);
+        em.flush();
+        
+        return avgScore;
     }
 }

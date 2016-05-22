@@ -22,13 +22,12 @@ Once a review gets 3 reports, it will be automatically deleted from the system.
 **Robert:**
 	+ Register
 	+ Login
-	* See list of reviews
-	* Add comments
-	* See comments
-	* Add a review for an album
+	+ See list of reviews
+	+ Add and see comments
+	+ Add a review for an album
 
 **Ismael:**
 	+ Logout
 	+ Add a new album
-	* Review report system
-	* See the list of albums
+	+ Review report system
+	+ See the list of albums

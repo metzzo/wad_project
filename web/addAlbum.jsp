@@ -16,9 +16,9 @@
     <body>
         <%@include file="/WEB-INF/jspf/header.jspf" %>
         
-        <h2 class="page-header">Add a new album</h2>
-        
         <div class="container">
+            <h2 class="page-header">Add a new album</h2>
+
             <form role="form" method="post" action="addAlbumController" enctype="multipart/form-data">
                 <div class="form-group">
                     <div class="input-group">

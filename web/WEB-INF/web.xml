@@ -4,6 +4,7 @@
         <description>ServletContextListener</description>
         <listener-class>listener.ContextListener</listener-class>
     </listener>
+    <!-- ************************************************* -->
     <servlet>
         <servlet-name>loginController</servlet-name>
         <servlet-class>controller.LoginUserController</servlet-class>
@@ -45,12 +46,12 @@
         <url-pattern>/makeReviewController</url-pattern>
     </servlet-mapping>
     <servlet>
-        <servlet-name>seeReviewController</servlet-name>
-        <servlet-class>controller.SeeReviewController</servlet-class>
+        <servlet-name>seeReviewsController</servlet-name>
+        <servlet-class>controller.SeeReviewsController</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>seeReviewController</servlet-name>
-        <url-pattern>/seeReviewController</url-pattern>
+        <servlet-name>seeReviewsController</servlet-name>
+        <url-pattern>/seeReviewsController</url-pattern>
     </servlet-mapping>
     <!-- ************************************************* -->
     <servlet>
@@ -94,11 +95,11 @@
         <url-pattern>/makeReviewView</url-pattern>
     </servlet-mapping>
     <servlet>
-        <servlet-name>seeReviewView</servlet-name>
-        <jsp-file>seeReview.jsp</jsp-file>
+        <servlet-name>seeReviewsView</servlet-name>
+        <jsp-file>seeReviews.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
-        <servlet-name>seeReviewView</servlet-name>
-        <url-pattern>/seeReviewView</url-pattern>
+        <servlet-name>seeReviewsView</servlet-name>
+        <url-pattern>/seeReviewsView</url-pattern>
     </servlet-mapping>
 </web-app>

@@ -55,15 +55,16 @@ public class AddAlbumController extends BaseServlet {
             
             request.setAttribute("formError", error);
 
-            forward("addAlbumView");
+            this.forward("addAlbumView");
         } else {
             // Get the information of the uploaded image file
             Part coverImg = request.getPart("cover");
             String coverImgName = coverImg.getSubmittedFileName();
             InputStream coverImgContent = coverImg.getInputStream();
-
+            
             // Define the path to the final storage location
-            File imageFolder = new File(getServletContext().getRealPath("/album_img"));
+            File imageFolder = new File(this.getServletContext().getRealPath("/album_img")
+                                        .replace("/build", "").replace("\\build", ""));
 
             // When an image with the same name already exists, modify the name to not override it
             File coverFile = new File(imageFolder, coverImgName);
@@ -84,9 +85,10 @@ public class AddAlbumController extends BaseServlet {
             
             albumDAO.persist(new Album(title, author, year, coverFile.getName(), genre, label));
 
+            // Update the list of albums with the recently added one
             this.getServletContext().setAttribute("ALBUMS", albumDAO.getAllAlbums());
 
-            forward("index.jsp");
+            this.forward("index.jsp");
         }
     }
 }

@@ -28,11 +28,11 @@ public class ReviewDAO {
     }
 
     public void persist(Review r) {
-        if (r.getId() == null) {
+        if (r.getId() == null)
             em.persist(r);
-        } else {
+        else
             em.merge(r);
-        }
+        
         em.flush();
     }
 

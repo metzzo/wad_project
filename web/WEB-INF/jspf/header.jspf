@@ -16,7 +16,6 @@
         <div class="btn-group" role="group">
             <a role="button" class="btn btn-default" href="albumListView">See the list of albums</a>
             <a role="button" class="btn btn-default" href="addAlbumView">Add an album</a>
-            <a role="button" class="btn btn-default" href="addReviewView">Add a review</a>
             <a role="button" class="btn btn-default" href="logoutController">Logout</a>
         </div>
     </c:if>

@@ -3,10 +3,8 @@ package controller;
 import domain.MyUser;
 import dao.UserDAO;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,7 +49,6 @@ public class RegisterUserController extends BaseServlet {
                 request.setAttribute("errors", errors);
 
                 if (errors.isEmpty()) {
-                    System.out.println("Register user");
                     MyUser u = UserDAO.getInstance().register(new MyUser(uname, pw, mail, null));
                     
                     if (u != null) {
@@ -62,7 +59,6 @@ public class RegisterUserController extends BaseServlet {
                         forward("/registerView");
                     }
                 } else {
-                    System.out.println("Not possible");
                     forward("/registerView");
                 }
             }

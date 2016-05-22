@@ -28,7 +28,11 @@ public class Review implements Serializable {
 
     @ManyToOne
     private MyUser user;
+    
+    @Lob
+    @Column(length=10000)
     private String review;
+    
     private int score;
 
     @OneToMany(cascade = CascadeType.PERSIST)
@@ -47,7 +51,8 @@ public class Review implements Serializable {
         this.user = user;
         this.review = review;
         this.score = score;
-        this.comments = new ArrayList<Comment>();
+        
+        this.comments = new ArrayList<>();
     }
 
     public Review() {

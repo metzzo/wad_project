@@ -33,7 +33,7 @@ public class Album implements Serializable {
     private String label;
     
     // Average score from the user reviews (between 0 and 5)
-    private int avgScore = -1; // -1 => To indicate that this album doesn't have any review yet
+    private double avgScore = -1; // -1 => To indicate that this album doesn't have any review yet
 
     public Album(String title, String author, int year, String cover, String genre, String label) {
         this.title = title;
@@ -132,11 +132,11 @@ public class Album implements Serializable {
         this.label = label;
     }
 
-    public int getAvgScore() {
+    public double getAvgScore() {
         return avgScore;
     }
 
-    public void setAvgScore(int avgScore) {
+    public void setAvgScore(double avgScore) {
         this.avgScore = avgScore;
     }
 }

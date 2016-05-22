@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * Created by rfischer on 20.05.16.
  */
-public class SeeReviewController extends BaseServlet {
+public class SeeReviewsController extends BaseServlet {
     @Override
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (request.getParameter("album_id") != null) {
@@ -35,7 +35,7 @@ public class SeeReviewController extends BaseServlet {
             List<Review> reviews = ReviewDAO.getInstance().getReviewsForAlbum(album);
             request.setAttribute("reviews", reviews);
 
-            forward("seeReviewView");
+            forward("seeReviewsView");
         } else {
             forward("/");
         }
